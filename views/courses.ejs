@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vera Kippel - Backend</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Kurshantering</h1>
+            <nav>
+                <ul class="headmenu">
+                    <li><a href="/">Startsida</a></li>
+                    <li><a href="/courses" class="current">Kurser</a></li>
+                    <li><a href="/about">Om</a></li>
+                </ul>
+            </nav>
+</header>
+
+
+<section class="container">
+    <main>
+    <h2>Kurser</h2>
+    
+        <h3>Inlagda kurser:</h3>
+        <button id="add-course">
+            <p>
+                <a href="/courses/add">Lägg till ny kurs</a>
+            </p>
+        </button>
+        <% if(locals.rows.length > 0) { %>
+            <% locals.rows.forEach((course) =>{ %>
+                <article>
+                    <h4><%= course.coursename %></h4>
+                    <p>
+                        Kod: <%= course.coursecode %>
+                    </p>
+                    <p>
+                        <a href="<%= course.syllabus %>">Länk till kursplan</a> 
+                    </p>
+                    <p>
+                        Progression: <%= (course.progression).toUpperCase() %> <!--Tar input till versaler-->
+                    </p>
+                    <section class="buttons">
+                    <button id="delete-btn">
+                        <a href="/delete/<%= course.id %>">Radera kurs</a>
+                    </button>
+                    <button id="edit-btn">
+                        <a href="/edit/<%= course.id %>">Ändra kurs</a>
+                    </button>
+                </section>
+            </article>
+            <% }); %>
+        <% }else { %>
+            <p>Inga kurser i listan...</p>
+        <% } %>
+
+</main>
+</section>
+    <footer>
+        <p>Backend Moment 1 - Vera Kippel - <a href="mailto:vera.kippel@outlook.com">vera.kippel@outlook.com</a></p>
+    </footer>
+
+</body>
+</html>

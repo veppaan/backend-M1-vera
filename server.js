@@ -10,3 +10,77 @@ const db = new sqlite3.Database("./db/cv.db");
 app.set("view engine", "ejs");    //View engine: EJS
 app.use(express.static("public")); //Statiska filer i katalog "public"
 app.use(bodyParser.urlencoded({extended: true})); //Ta emot form-data
+
+//Route, där användaren hamnar
+app.get("/", (req, res) =>{
+    res.render("index", {
+        fullname: "Vera Kippel"
+    }); //Vilken vy vi vill rendera
+});
+
+app.get("/courses", (req, res) =>{
+    db.all("SELECT * FROM courses ORDER BY id DESC;", (err, rows) =>{
+        if(err){
+            console.error(err.message);
+        }
+        res.render("courses", { //Vilken vy vi vill rendera
+            error: "",
+            rows: rows
+        });
+    });
+});
+
+app.get("/courses/add", (req, res) => {
+    res.render("addcourses", {
+        errors: [],
+        newCode: "",
+        newName: "",
+        newSyllabus: "",
+        newProgression: ""
+    });
+});
+
+app.post("/courses/add", (req, res) => {
+    //Läs in formulär-data
+    let newCode = req.body.code;
+    let newName = req.body.name;
+    let newSyllabus = req.body.syllabus;
+    let newProgression = req.body.progression;
+
+    let errors = [];
+
+    //Validera input
+    if(newCode === ""){
+        errors.push("Ange en korrekt kurskod!");
+    }
+    if(newName === ""){
+        errors.push("Ange ett korrekt namn!");
+    }
+    if(newSyllabus === ""){
+        errors.push("Ange en korrekt syllabus!");
+    }
+    //Gör en array för godkända progressioner för att kunna kolla progressions-värdet som skrivits in
+    let correctProg = ["A", "B", "C"];
+    if(!correctProg.includes(newProgression.trim().toUpperCase())){ //Gör input till uppercase för att kunna hantera gemener
+        errors.push("Ange en korrekt progression (A, B eller C)!");
+    }
+    
+    //Lägg till ny kurs
+    //Validering för korrekt ifyllt
+    if(errors.length === 0){
+        const stmt = db.prepare("INSERT INTO courses(coursecode, coursename, syllabus, progression)VALUES(?, ?, ?, ?);");
+        stmt.run(newCode, newName, newSyllabus, newProgression);
+        stmt.finalize();
+
+        //Redirect till kurssida
+        res.redirect("/courses");
+    }else{
+        res.render("addcourses", {
+            errors: errors,
+            newCode: newCode,
+            newName: newName,
+            newSyllabus: newSyllabus,
+            newProgression: newProgression
+        });
+    }
+});

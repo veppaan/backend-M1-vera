@@ -64,6 +64,22 @@ input[type=submit]{
     border: none;
     color: white;
 }
+#change-btn input[type=submit]{
+    background-color: rgb(123, 142, 231);
+}
+#change-btn{
+    width: fit-content;
+    border-radius: 8px;
+    background-color: rgb(123, 142, 231);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border: 2px solid #ededed;
+    padding: 0.3em 0.8em;
+    margin-top: 1.2em;
+    margin-bottom: 1.5em;
+}
+#change-btn:hover, #change-btn input[type=submit]:hover{
+    cursor: pointer;
+}
 #add-button{
     background-color: rgb(148, 191, 148);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -71,6 +87,9 @@ input[type=submit]{
     padding: 0.5em 1em;
     margin-top: 1.2em;
     margin-bottom: 1.5em;
+}
+#add-button input[type=submit]:hover{
+    cursor: pointer;
 }
 #delete-btn{
     background-color: rgb(201, 68, 27);

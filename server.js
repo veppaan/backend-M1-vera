@@ -5,7 +5,7 @@ const port = 3000;
 
 //Databas
 const sqlite3 = require("sqlite3").verbose();
-const db = new sqlite3.Database("./db/cv.db");
+const db = new sqlite3.Database("./db/courses.db");
 
 app.set("view engine", "ejs");    //View engine: EJS
 app.use(express.static("public")); //Statiska filer i katalog "public"
@@ -96,6 +96,63 @@ app.get("/delete/:id", (req, res) =>{
         //Skickar användare till kurs-sida
         res.redirect("/courses");
     });
+});
+
+app.get("/edit/:id", (req, res) =>{
+    let id = req.params.id;
+    db.get("SELECT * FROM courses WHERE id=?;", id, (err, row) =>{
+        if(err){
+            console.error(err.message);
+        }
+        res.render("edit", {
+            row: row,
+            errors: ""
+        });
+    });
+});
+
+app.post("/edit/:id", (req, res) =>{
+    //Läs in formulär-data
+    let id = req.params.id;
+    let newCode = req.body.code;
+    let newName = req.body.name;
+    let newSyllabus = req.body.syllabus;
+    let newProgression = req.body.progression;
+
+    let errors = [];
+
+    //Validera input
+    if(newCode === ""){
+        errors.push("Ange en korrekt kurskod!");
+    }
+    if(newName === ""){
+        errors.push("Ange ett korrekt namn!");
+    }
+    if(newSyllabus === ""){
+        errors.push("Ange en korrekt syllabus!");
+    }
+    let correctProg = ["A", "B", "C"];
+    if(!correctProg.includes(newProgression.trim().toUpperCase())){
+        errors.push("Ange en korrekt progression (A, B eller C)!");
+    }
+    
+    if(errors.length === 0){
+        const stmt = db.prepare("UPDATE courses SET coursecode=?, coursename=?, syllabus=?, progression=? WHERE id=?;");
+        stmt.run(newCode, newName, newSyllabus, newProgression, id);
+        stmt.finalize();
+
+        res.redirect("/courses");
+    }else{
+        res.render("edit", {
+            errors: errors,
+            row: {
+            newCode: newCode,
+            newName: newName,
+            newSyllabus: newSyllabus,
+            newProgression: newProgression
+            }
+        });
+    }
 });
 
 app.get("/about", (req, res) =>{

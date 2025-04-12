@@ -84,3 +84,12 @@ app.post("/courses/add", (req, res) => {
         });
     }
 });
+
+app.get("/about", (req, res) =>{
+    res.render("about"); //Vilken vy vi vill rendera
+});
+
+//Starta app
+app.listen(port, () => {
+    console.log("Servern startad på port: " + port);
+});

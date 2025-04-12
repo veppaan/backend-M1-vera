@@ -85,6 +85,19 @@ app.post("/courses/add", (req, res) => {
     }
 });
 
+app.get("/delete/:id", (req, res) =>{
+    let id = req.params.id;
+
+    //Radera kurs
+    db.run("DELETE FROM courses WHERE id=?;", id, (err) =>{
+        if(err){
+            console.error(err.message);
+        }
+        //Skickar användare till kurs-sida
+        res.redirect("/courses");
+    });
+});
+
 app.get("/about", (req, res) =>{
     res.render("about"); //Vilken vy vi vill rendera
 });

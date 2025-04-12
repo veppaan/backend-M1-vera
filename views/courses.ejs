@@ -22,13 +22,13 @@
 <section class="container">
     <main>
     <h2>Kurser</h2>
-    
+    <button id="add-course">
+        <p>
+            <a href="/courses/add">Lägg till ny kurs</a>
+        </p>
+    </button>
         <h3>Inlagda kurser:</h3>
-        <button id="add-course">
-            <p>
-                <a href="/courses/add">Lägg till ny kurs</a>
-            </p>
-        </button>
+        
         <% if(locals.row.length > 0) { %>
             <% locals.row.forEach((course) =>{ %>
                 <article>

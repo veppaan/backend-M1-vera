@@ -1,8 +1,8 @@
 //Installering för SQLite
-
+require("dotenv").config();
 const sqlite3 = require("sqlite3").verbose();
 
-const db = new sqlite3.Database("./db/courses.db");
+const db = new sqlite3.Database(process.env.DB_PATH);
 
 db.serialize(() =>{
     db.run("DROP TABLE IF EXISTS courses");

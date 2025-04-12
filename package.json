@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "Moment 1 - Backend",
   "dependencies": {
+    "dotenv": "^16.5.0",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "sqlite3": "^5.1.7"

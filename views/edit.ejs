@@ -35,16 +35,16 @@
 
     <form method="post">
         <label for="code">Kurskod:</label>
-        <input type="text" id="code" name="code" value="<%= row.coursecode %>">
+        <input type="text" id="code" name="code" value="<%= newCode %>">
         <br>
         <label for="name">Kursnamn:</label>
-        <input type="text" id="name" name="name" value="<%= row.coursename %>">
+        <input type="text" id="name" name="name" value="<%= newName %>">
         <br>
         <label for="syllabus">Syllabus(URL) till kursplan:</label>
-        <input type="text" id="syllabus" name="syllabus" value="<%= row.syllabus %>">
+        <input type="text" id="syllabus" name="syllabus" value="<%= newSyllabus %>">
         <br>
         <label for="progression">Progression:</label>
-        <input type="text" id="progression" name="progression" value="<%= row.progression %>">
+        <input type="text" id="progression" name="progression" value="<%= newProgression %>">
         <br>
         <input type="submit" value="Ändra kurs">
     </form>

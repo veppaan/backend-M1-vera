@@ -29,8 +29,8 @@
                 <a href="/courses/add">Lägg till ny kurs</a>
             </p>
         </button>
-        <% if(locals.rows.length > 0) { %>
-            <% locals.rows.forEach((course) =>{ %>
+        <% if(locals.row.length > 0) { %>
+            <% locals.row.forEach((course) =>{ %>
                 <article>
                     <h4><%= course.coursename %></h4>
                     <p>

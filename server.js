@@ -19,13 +19,13 @@ app.get("/", (req, res) =>{
 });
 
 app.get("/courses", (req, res) =>{
-    db.all("SELECT * FROM courses ORDER BY id DESC;", (err, rows) =>{
+    db.all("SELECT * FROM courses ORDER BY id DESC;", (err, row) =>{
         if(err){
             console.error(err.message);
         }
         res.render("courses", { //Vilken vy vi vill rendera
             error: "",
-            rows: rows
+            row: row
         });
     });
 });
@@ -106,7 +106,11 @@ app.get("/edit/:id", (req, res) =>{
         }
         res.render("edit", {
             row: row,
-            errors: ""
+            errors: "",
+            newCode: row.coursecode,
+            newName: row.coursename,
+            newSyllabus: row.syllabus,
+            newProgression: row.progression
         });
     });
 });
@@ -145,12 +149,10 @@ app.post("/edit/:id", (req, res) =>{
     }else{
         res.render("edit", {
             errors: errors,
-            row: {
             newCode: newCode,
             newName: newName,
             newSyllabus: newSyllabus,
             newProgression: newProgression
-            }
         });
     }
 });

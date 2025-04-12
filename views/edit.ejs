@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vera Kippel - Backend</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Kurshantering</h1>
+        <nav>
+            <ul class="headmenu">
+                <li><a href="/">Startsida</a></li>
+                <li><a href="/courses">Kurser</a></li>
+                <li><a href="/about">Om</a></li>
+            </ul>
+        </nav>
+</header>
+
+    <div class="container">
+        <main>
+    <h2>Ändra din kurs</h2>
+
+    <% if(locals.errors.length > 0) { %>
+        <ul>
+        <% errors.forEach((error) => { %>
+            <li class="error">
+                <%= error %>
+            </li>
+       <% }); %>     
+        </ul>
+    <% } %>
+    <p id="change-error"></p>
+
+    <form method="post">
+        <label for="email">Kurskod:</label>
+        <input type="text" id="code" name="code" value="<%= row.coursecode %>">
+        <br>
+        <label for="name">Kursnamn:</label>
+        <input type="text" id="name" name="name" value="<%= row.coursename %>">
+        <br>
+        <label for="email">Syllabus(URL) till kursplan:</label>
+        <input type="text" id="syllabus" name="syllabus" value="<%= row.syllabus %>">
+        <br>
+        <label for="email">Progression:</label>
+        <input type="text" id="progression" name="progression" value="<%= row.progression %>">
+        <br>
+        <input type="submit" value="Ändra kurs">
+    </form>
+</main>
+</div>
+    <footer>
+        <p>Backend Moment 1 - Vera Kippel - <a href="mailto:vera.kippel@outlook.com">vera.kippel@outlook.com</a></p>
+    </footer>
+
+</body>
+</html>

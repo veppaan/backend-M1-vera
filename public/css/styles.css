@@ -46,3 +46,67 @@ footer{
 footer a{
     color: rgb(0, 2, 112);
 }
+button{
+    padding: 0 1em;
+    border-radius: 8px;
+}
+#add-course p a{
+    text-decoration: none;
+    color: white;
+}
+#add-course{
+    background-color: rgb(148, 191, 148);
+    border: 2px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+input[type=submit]{
+    background-color: rgb(148, 191, 148);
+    border: none;
+    color: white;
+}
+#add-button{
+    background-color: rgb(148, 191, 148);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border: 2px solid #ededed;
+    padding: 0.5em 1em;
+    margin-top: 1.2em;
+    margin-bottom: 1.5em;
+}
+#delete-btn{
+    background-color: rgb(201, 68, 27);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border: 2px solid #ededed;
+    padding: 0.5em 1em;
+    margin-top: 1.2em;
+    margin-bottom: 1.5em;
+    margin-right: 1em;
+}
+#delete-btn a{
+    color:white;
+    text-decoration: none;
+}
+#edit-btn{
+    background-color: rgb(123, 142, 231);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border: 2px solid #ededed;
+    padding: 0.5em 1em;
+    margin-top: 1.2em;
+    margin-bottom: 1.5em;
+}
+#edit-btn a{
+    color:white;
+    text-decoration: none;
+}
+.error{
+    color: red;
+    font-size: bold;
+}
+article{
+    border: 1px solid #ccc;
+    padding: 0 1em;
+    margin: 1em 0;
+    line-height: 1.2;
+}
+article p{
+    font-size: 0.9em;
+}
